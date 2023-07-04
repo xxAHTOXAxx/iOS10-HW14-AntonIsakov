@@ -10,7 +10,6 @@
 		31A29EA42A54951400AA9F43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A29EA32A54951400AA9F43 /* AppDelegate.swift */; };
 		31A29EA62A54951400AA9F43 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A29EA52A54951400AA9F43 /* SceneDelegate.swift */; };
 		31A29EA82A54951400AA9F43 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A29EA72A54951400AA9F43 /* ViewController.swift */; };
-		31A29EAB2A54951400AA9F43 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31A29EA92A54951400AA9F43 /* Main.storyboard */; };
 		31A29EAD2A54951600AA9F43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31A29EAC2A54951600AA9F43 /* Assets.xcassets */; };
 		31A29EB02A54951600AA9F43 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31A29EAE2A54951600AA9F43 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -20,7 +19,6 @@
 		31A29EA32A54951400AA9F43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31A29EA52A54951400AA9F43 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		31A29EA72A54951400AA9F43 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		31A29EAA2A54951400AA9F43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		31A29EAC2A54951600AA9F43 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		31A29EAF2A54951600AA9F43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		31A29EB12A54951600AA9F43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,15 +54,38 @@
 		31A29EA22A54951400AA9F43 /* iOS10-HW14-AntonIsakov */ = {
 			isa = PBXGroup;
 			children = (
+				31A29EBC2A54968D00AA9F43 /* Sourses */,
+				31A29EBB2A54967A00AA9F43 /* Resourses */,
+			);
+			path = "iOS10-HW14-AntonIsakov";
+			sourceTree = "<group>";
+		};
+		31A29EBA2A54966F00AA9F43 /* App */ = {
+			isa = PBXGroup;
+			children = (
 				31A29EA32A54951400AA9F43 /* AppDelegate.swift */,
 				31A29EA52A54951400AA9F43 /* SceneDelegate.swift */,
-				31A29EA72A54951400AA9F43 /* ViewController.swift */,
-				31A29EA92A54951400AA9F43 /* Main.storyboard */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		31A29EBB2A54967A00AA9F43 /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
 				31A29EAC2A54951600AA9F43 /* Assets.xcassets */,
 				31A29EAE2A54951600AA9F43 /* LaunchScreen.storyboard */,
 				31A29EB12A54951600AA9F43 /* Info.plist */,
 			);
-			path = "iOS10-HW14-AntonIsakov";
+			path = Resourses;
+			sourceTree = "<group>";
+		};
+		31A29EBC2A54968D00AA9F43 /* Sourses */ = {
+			isa = PBXGroup;
+			children = (
+				31A29EBA2A54966F00AA9F43 /* App */,
+				31A29EA72A54951400AA9F43 /* ViewController.swift */,
+			);
+			path = Sourses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +148,6 @@
 			files = (
 				31A29EB02A54951600AA9F43 /* LaunchScreen.storyboard in Resources */,
 				31A29EAD2A54951600AA9F43 /* Assets.xcassets in Resources */,
-				31A29EAB2A54951400AA9F43 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,14 +167,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		31A29EA92A54951400AA9F43 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				31A29EAA2A54951400AA9F43 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		31A29EAE2A54951600AA9F43 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -288,10 +300,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "iOS10-HW14-AntonIsakov/Info.plist";
+				INFOPLIST_FILE = "iOS10-HW14-AntonIsakov/Resourses/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -315,10 +326,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "iOS10-HW14-AntonIsakov/Info.plist";
+				INFOPLIST_FILE = "iOS10-HW14-AntonIsakov/Resourses/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
