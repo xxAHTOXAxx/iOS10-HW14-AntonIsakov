@@ -6,11 +6,27 @@ class Header: UICollectionReusableView {
     
     // MARK: - Outlets
     
-    lazy var title: UILabel = {
+    private lazy var title: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    private lazy var allButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Все", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(allButtonTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    var isAllButtonHidden: Bool = false {
+        didSet {
+            allButton.isHidden = isAllButtonHidden
+        }
+    }
     
     // MARK: - Initializers
     
@@ -29,13 +45,16 @@ class Header: UICollectionReusableView {
     
     private func setupHierarchy() {
         addSubview(title)
+        addSubview(allButton)
     }
     
     private func setupLayout() {
-        title.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             title.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            title.leftAnchor.constraint(equalTo: self.leftAnchor)
+            title.leftAnchor.constraint(equalTo: self.leftAnchor),
+            
+            allButton.centerYAnchor.constraint(equalTo: title.centerYAnchor),
+            allButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -1),
         ])
     }
     
@@ -47,5 +66,7 @@ class Header: UICollectionReusableView {
         super.prepareForReuse()
         title.text = nil
     }
+    
+    @objc private func allButtonTapped() {}
 }
 

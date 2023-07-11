@@ -4,7 +4,7 @@ class MediaTypes: UICollectionViewCell {
     
     static let identifier = "MediaTypes"
     
-    let iconImageView: UIImageView = {
+    private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 4
         imageView.clipsToBounds = true
@@ -12,20 +12,20 @@ class MediaTypes: UICollectionViewCell {
         return imageView
     }()
     
-    let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let arrowImageView: UIImageView = {
+    private lazy var arrowImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "chevron.right"))
         imageView.tintColor = .systemGray
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    let additionalTextLabel: UILabel = {
+    private lazy var additionalTextLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = UIColor.lightGray

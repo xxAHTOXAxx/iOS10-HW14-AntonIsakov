@@ -4,12 +4,12 @@ struct CompositionalItem: Hashable {
     var description: String?
     var image: UIImage?
     var numberOfPhotos: Int?
+    
 }
 
 struct CompositionalSection: Hashable {
     var name: String
     var items: [CompositionalItem]
-    //var buttonIsHiden: Bool = true
 }
 
 extension CompositionalSection {

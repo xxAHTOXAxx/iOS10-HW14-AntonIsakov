@@ -5,12 +5,14 @@ final class MainTabBarController: UITabBarController {
         let tabBarController = UITabBarController ()
         tabBarController.setViewControllers(
             [
-                createChildViewController(controller: FirstTabBarViewController(), title: "Медиатека", image: UIImage(systemName: "photo.fill.on.rectangle.fill"), tag: 0),
+                createChildViewController(controller: FirstTabBarViewController(), title: "Медиатека", image:
+                                            UIImage(systemName: "photo.fill.on.rectangle.fill"), tag: 0),
                 createChildViewController(controller: SecondTabBarViewController(), title: "Для Bac", image:
                                             UIImage (systemName: "heart.text.square.fill"), tag: 1),
-                createChildViewController(controller: CompositionalLayoutViewController(), title: "Альбомы", image: UIImage(systemName: "rectangle.stack.fill"), tag: 2),
-                createChildViewController(controller: FourthTabBarViewController(), title: "Поиск", image:
-                                            UIImage (systemName: "magnifyingglass"), tag: 3) ],
+                createChildViewController(controller: CompositionalLayoutViewController(), title: "Альбомы",
+                                          image: UIImage(systemName: "rectangle.stack.fill"), tag: 2),
+                createChildViewController(controller: FourthTabBarViewController(), title: "Поиск",
+                                          image: UIImage (systemName: "magnifyingglass"), tag: 3) ],
             animated: true
         )
         tabBarController.selectedIndex = 2
@@ -22,7 +24,6 @@ final class MainTabBarController: UITabBarController {
         let navigationController = UINavigationController (rootViewController: viewController)
         viewController.tabBarItem = UITabBarItem(title: title, image: image, tag: tag)
         viewController.title = title
-        //viewController.navigationController?.navigationBar.prefersLargeTitles = true
         navigationController.navigationBar.topItem?.titleView?.tintColor = .clear
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.navigationBar.shadowImage = UIImage()
