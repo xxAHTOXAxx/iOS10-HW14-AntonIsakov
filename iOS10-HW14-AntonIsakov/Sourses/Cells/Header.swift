@@ -32,6 +32,7 @@ class Header: UICollectionReusableView {
     }
     
     private func setupLayout() {
+        title.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             title.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             title.leftAnchor.constraint(equalTo: self.leftAnchor)

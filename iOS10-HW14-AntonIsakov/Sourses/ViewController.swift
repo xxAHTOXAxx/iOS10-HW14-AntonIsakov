@@ -60,7 +60,7 @@ class CompositionalLayoutViewController: UIViewController {
                                                                    trailing: 0)
                 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.47),
-                                                       heightDimension: .fractionalWidth(1 / 1.8 * 2))
+                                                       heightDimension: .fractionalWidth(1 / 1.7 * 2))
                 
                 let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
                                                                    subitem: layoutItem,
@@ -157,7 +157,7 @@ class CompositionalLayoutViewController: UIViewController {
                                                                       bottom: 10,
                                                                       trailing: 10)
                 
-                let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension:.fractionalWidth(1),
+                let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension:.fractionalWidth(0.88),
                                                                      heightDimension: .estimated(80))
                 
                 let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
@@ -237,7 +237,6 @@ extension CompositionalLayoutViewController: UICollectionViewDataSource, UIColle
             
         }
     }
-    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return CompositionalSection.modelSectionArray.count
