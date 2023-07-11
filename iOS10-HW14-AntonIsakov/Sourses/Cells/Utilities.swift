@@ -34,6 +34,13 @@ class Utilities: UICollectionViewCell {
         return label
     }()
     
+    private lazy var divider: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.systemGray2.withAlphaComponent(0.5)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     // MARK: - Initializers
     
     override init(frame: CGRect) {
@@ -52,10 +59,10 @@ class Utilities: UICollectionViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(arrowImageView)
         contentView.addSubview(additionalTextLabel)
+        contentView.addSubview(divider)
     }
     
     private func setupLayout() {
-        
         NSLayoutConstraint.activate([
             
             iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -72,6 +79,11 @@ class Utilities: UICollectionViewCell {
             
             additionalTextLabel.trailingAnchor.constraint(equalTo: arrowImageView.trailingAnchor, constant: -25),
             additionalTextLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            
+            divider.leadingAnchor.constraint (equalTo: iconImageView.trailingAnchor),
+            divider.trailingAnchor.constraint (equalTo: arrowImageView.trailingAnchor),
+            divider.bottomAnchor.constraint (equalTo: bottomAnchor),
+            divider.heightAnchor.constraint (equalToConstant: 1)
         ])
     }
     

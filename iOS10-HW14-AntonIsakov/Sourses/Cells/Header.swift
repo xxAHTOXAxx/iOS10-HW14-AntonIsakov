@@ -38,6 +38,10 @@ class Header: UICollectionReusableView {
         ])
     }
     
+    func configuration(model: CompositionalSection) {
+        self.title.text = model.name
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         title.text = nil

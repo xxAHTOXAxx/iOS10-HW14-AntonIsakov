@@ -26,7 +26,7 @@ class SharedAlbums: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 5
         imageView.clipsToBounds = true
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -62,14 +62,14 @@ class SharedAlbums: UICollectionViewCell {
         NSLayoutConstraint.activate([
             image.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
             image.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
-            image.widthAnchor.constraint(equalTo: image.heightAnchor), // Set the width equal to the height
-            image.heightAnchor.constraint(equalToConstant: 150), // Adjust the image height as desired
+            image.trailingAnchor.constraint (equalTo: contentView.trailingAnchor, constant: -2),
+            image.heightAnchor.constraint (equalTo: image .widthAnchor) ,
             
-            featuredTitle.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 2), // Adjust the spacing between the title and the image
+            featuredTitle.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 2),
             featuredTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
             featuredTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
             
-            numberOfPhotos.topAnchor.constraint(equalTo: featuredTitle.bottomAnchor, constant: 2), // Adjust the spacing between the title and the number of photos
+            numberOfPhotos.topAnchor.constraint(equalTo: featuredTitle.bottomAnchor, constant: 2), 
             numberOfPhotos.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
             numberOfPhotos.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
             numberOfPhotos.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),

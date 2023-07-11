@@ -8,7 +8,6 @@ class MyAlbums: UICollectionViewCell {
     
     private lazy var numberOfPhotos: UILabel = {
         let label = UILabel()
-        //label.font = UIFont.preferredFont(forTextStyle: .title2)
         label.font = UIFont.systemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .systemGray
@@ -18,7 +17,6 @@ class MyAlbums: UICollectionViewCell {
     private lazy var featuredTitle: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
-       //label.font = UIFontMetrics.default.scaledFont(for: UIFont.systemFont(ofSize: 12, weight: .bold))
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -27,7 +25,7 @@ class MyAlbums: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 5
         imageView.clipsToBounds = true
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -48,28 +46,28 @@ class MyAlbums: UICollectionViewCell {
     // MARK: - Setup
     
     private func setupHierarchy() {
-
+        
         contentView.addSubview(image)
-            contentView.addSubview(numberOfPhotos)
-            contentView.addSubview(featuredTitle)
+        contentView.addSubview(numberOfPhotos)
+        contentView.addSubview(featuredTitle)
     }
     
     private func setupLayout() {
-            NSLayoutConstraint.activate([
-                image.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
-                        image.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
-                        image.widthAnchor.constraint(equalTo: image.heightAnchor), // Set the width equal to the height
-                        image.heightAnchor.constraint(equalToConstant: 150), // Adjust the image height as desired
-
-                        featuredTitle.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 8), // Adjust the spacing between the title and the image
-                        featuredTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
-                        featuredTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
-
-                        numberOfPhotos.topAnchor.constraint(equalTo: featuredTitle.bottomAnchor, constant: 4), // Adjust the spacing between the title and the number of photos
-                        numberOfPhotos.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
-                        numberOfPhotos.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
-                        numberOfPhotos.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
-               ])
+        NSLayoutConstraint.activate([
+            image.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
+            image.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
+            image.trailingAnchor.constraint (equalTo: contentView.trailingAnchor, constant: -2),
+            image.heightAnchor.constraint (equalTo: image .widthAnchor) ,
+            
+            featuredTitle.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 8),
+            featuredTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
+            featuredTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
+            
+            numberOfPhotos.topAnchor.constraint(equalTo: featuredTitle.bottomAnchor, constant: 4),
+            numberOfPhotos.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
+            numberOfPhotos.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
+            numberOfPhotos.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
+        ])
     }
     
     // MARK: - Configuration

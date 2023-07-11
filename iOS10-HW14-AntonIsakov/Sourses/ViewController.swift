@@ -22,6 +22,7 @@ class CompositionalLayoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Альбомы"
+        view.backgroundColor = .white
         setupHierarchy()
         setupLayout()
     }
@@ -51,13 +52,14 @@ class CompositionalLayoutViewController: UIViewController {
             case 0:
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .fractionalHeight(0.5))
+                
                 let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
                 layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 5,
                                                                    leading: 5,
                                                                    bottom: 10,
                                                                    trailing: 0)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2),
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.47),
                                                        heightDimension: .fractionalWidth(1 / 1.8 * 2))
                 
                 let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
@@ -75,12 +77,20 @@ class CompositionalLayoutViewController: UIViewController {
                                                                       trailing: 10)
                 layoutSection.orthogonalScrollingBehavior = .groupPaging
                 
+                let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension:.fractionalWidth(0.93),
+                                                                     heightDimension: .estimated (80))
+                let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                    layoutSize: layoutSectionHeaderSize,
+                    elementKind: UICollectionView.elementKindSectionHeader,
+                    alignment: .top)
+                layoutSection.boundarySupplementaryItems = [layoutSectionHeader]
+                
                 return layoutSection
                 
             case 1:
 
                 let itemSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(0.5),
+                    widthDimension: .fractionalWidth(1),
                     heightDimension: .fractionalHeight(1)
                 )
 
@@ -91,8 +101,8 @@ class CompositionalLayoutViewController: UIViewController {
                                                                    trailing: 0)
 
                 let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1),
-                    heightDimension: .fractionalHeight(0.35)
+                    widthDimension: .fractionalWidth(0.47),
+                    heightDimension: .fractionalWidth(0.57)
                 )
                 
                 let layoutGroup = NSCollectionLayoutGroup.horizontal(
@@ -111,6 +121,15 @@ class CompositionalLayoutViewController: UIViewController {
                                                                       trailing: 10)
                 
                 layoutSection.orthogonalScrollingBehavior = .groupPaging
+                
+                let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension:.fractionalWidth(0.93),
+                                                                     heightDimension: .estimated (80))
+                let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                    layoutSize: layoutSectionHeaderSize,
+                    elementKind: UICollectionView.elementKindSectionHeader,
+                    alignment: .top)
+                layoutSection.boundarySupplementaryItems = [layoutSectionHeader]
+                
                 return layoutSection
                 
             default:
@@ -124,6 +143,7 @@ class CompositionalLayoutViewController: UIViewController {
                 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                        heightDimension: .absolute(44))
+                
                 let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                                      subitems: [layoutItem])
                 layoutGroup.contentInsets = NSDirectionalEdgeInsets(top: 0,
@@ -139,6 +159,7 @@ class CompositionalLayoutViewController: UIViewController {
                 
                 let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension:.fractionalWidth(1),
                                                                      heightDimension: .estimated(80))
+                
                 let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: layoutSectionHeaderSize,
                     elementKind: UICollectionView.elementKindSectionHeader,
@@ -165,32 +186,33 @@ extension CompositionalLayoutViewController: UICollectionViewDataSource, UIColle
         switch indexPath.section {
             
         case 0:
-            let item = collectionView.dequeueReusableCell(withReuseIdentifier: MyAlbums.identifier, for: indexPath) as! MyAlbums
+            let item = collectionView.dequeueReusableCell(withReuseIdentifier: MyAlbums.identifier, for: indexPath) as? MyAlbums
             let section = CompositionalSection.modelSectionArray[indexPath.section]
             let model = section.items[indexPath.item]
-            item.configuration(model: model)
-            return item
+            item?.configuration(model: model)
+            
+            return item ?? UICollectionViewCell()
         case 1:
-            let item = collectionView.dequeueReusableCell(withReuseIdentifier: SharedAlbums.identifier, for: indexPath) as! SharedAlbums
+            let item = collectionView.dequeueReusableCell(withReuseIdentifier: SharedAlbums.identifier, for: indexPath) as? SharedAlbums
             let section = CompositionalSection.modelSectionArray[indexPath.section]
             let model = section.items[indexPath.item]
-            item.configuration(model: model)
+            item?.configuration(model: model)
          
-            return item
+            return item ?? UICollectionViewCell()
         case 2:
-            let item = collectionView.dequeueReusableCell(withReuseIdentifier: MediaTypes.identifier, for: indexPath) as! MediaTypes
+            let item = collectionView.dequeueReusableCell(withReuseIdentifier: MediaTypes.identifier, for: indexPath) as? MediaTypes
             let section = CompositionalSection.modelSectionArray[indexPath.section]
             let model = section.items[indexPath.item]
-            item.configuration(model: model)
+            item?.configuration(model: model)
             
-            return item
+            return item ?? UICollectionViewCell()
         default:
-            let item = collectionView.dequeueReusableCell(withReuseIdentifier: Utilities.identifier, for: indexPath) as! Utilities
+            let item = collectionView.dequeueReusableCell(withReuseIdentifier: Utilities.identifier, for: indexPath) as? Utilities
             let section = CompositionalSection.modelSectionArray[indexPath.section]
             let model = section.items[indexPath.item]
-            item.configuration(model: model)
+            item?.configuration(model: model)
             
-            return item
+            return item ?? UICollectionViewCell()
         }
     }
     
@@ -199,22 +221,23 @@ extension CompositionalLayoutViewController: UICollectionViewDataSource, UIColle
         switch indexPath.section {
         case 1:
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as! Header
-            header.title.text = "Мои альбомы"
+            let section = CompositionalSection.modelSectionArray[indexPath.section]
+                header.configuration(model: section)
             return header
         case 2:
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as! Header
-            header.title.text = "Люд и места"
+            let section = CompositionalSection.modelSectionArray[indexPath.section]
+                header.configuration(model: section)
             return header
-        case 3:
+        default:
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as! Header
-            header.title.text = "Типы медиафайлов"
+            let section = CompositionalSection.modelSectionArray[indexPath.section]
+                header.configuration(model: section)
             return header
             
-        default:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Другое", for: indexPath)
-            return header
         }
     }
+    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return CompositionalSection.modelSectionArray.count
