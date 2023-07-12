@@ -21,7 +21,7 @@ class MyAlbums: UICollectionViewCell {
         return label
     }()
     
-    private let image: UIImageView = {
+    private lazy var image: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 5
         imageView.clipsToBounds = true

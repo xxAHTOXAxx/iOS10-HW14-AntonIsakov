@@ -88,7 +88,7 @@ class CompositionalLayoutViewController: UIViewController {
                 layoutSection.orthogonalScrollingBehavior = .groupPaging
                 
                 let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension:.fractionalWidth(0.93),
-                                                                     heightDimension: .estimated (80))
+                                                                     heightDimension: .estimated (40))
                 let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: layoutSectionHeaderSize,
                     elementKind: UICollectionView.elementKindSectionHeader,
@@ -134,7 +134,7 @@ class CompositionalLayoutViewController: UIViewController {
                 layoutSection.orthogonalScrollingBehavior = .groupPaging
                 
                 let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension:.fractionalWidth(0.93),
-                                                                     heightDimension: .estimated (80))
+                                                                     heightDimension: .estimated (40))
                 let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: layoutSectionHeaderSize,
                     elementKind: UICollectionView.elementKindSectionHeader,
@@ -169,7 +169,7 @@ class CompositionalLayoutViewController: UIViewController {
                                                                       trailing: 10)
                 
                 let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension:.fractionalWidth(0.88),
-                                                                     heightDimension: .estimated(80))
+                                                                     heightDimension: .estimated(40))
                 
                 let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: layoutSectionHeaderSize,

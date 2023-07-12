@@ -21,7 +21,11 @@ extension CompositionalSection {
                                      CompositionalItem(description: "WhatsApp", image: UIImage(named: "WhiteBear") ?? UIImage(), numberOfPhotos: 436),
                                      CompositionalItem(description: "Instagram", image: UIImage(named: "moto") ?? UIImage(), numberOfPhotos: 116),
                                      CompositionalItem(description: "Viber", image: UIImage(named: "Sea") ?? UIImage(), numberOfPhotos: 73),
-                                     CompositionalItem(description: "Another", image: UIImage(named: "dog") ?? UIImage(), numberOfPhotos: 56)]),
+                                     CompositionalItem(description: "Another", image: UIImage(named: "dog") ?? UIImage(), numberOfPhotos: 56),
+                                     CompositionalItem(description: "Facebook", image: UIImage(named: "dog2") ?? UIImage(), numberOfPhotos: 54),
+                                     CompositionalItem(description: "My photo", image: UIImage(named: "bob") ?? UIImage(), numberOfPhotos: 21)
+                                    ]),
+        
         
         CompositionalSection(name: "Люди и места",
                              items: [CompositionalItem(description: "Люди", image: UIImage(named: "moto") ?? UIImage(), numberOfPhotos: 123),

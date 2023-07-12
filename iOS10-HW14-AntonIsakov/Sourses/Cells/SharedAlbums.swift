@@ -31,12 +31,6 @@ class SharedAlbums: UICollectionViewCell {
         return imageView
     }()
     
-    lazy var stack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        return stack
-    }()
-    
     // MARK: - Initializers
     
     override init(frame: CGRect) {
