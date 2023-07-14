@@ -50,8 +50,8 @@ class Header: UICollectionReusableView {
     
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            title.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            title.leftAnchor.constraint(equalTo: self.leftAnchor),
+            title.bottomAnchor.constraint(equalTo: bottomAnchor),
+            title.leftAnchor.constraint(equalTo: leftAnchor),
             
             allButton.centerYAnchor.constraint(equalTo: title.centerYAnchor),
             allButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -1),

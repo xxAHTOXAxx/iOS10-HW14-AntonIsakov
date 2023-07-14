@@ -88,10 +88,14 @@ class Utilities: UICollectionViewCell {
     }
     
     func configuration(model: CompositionalItem) {
-        self.titleLabel.text = model.description
-        self.additionalTextLabel.text = String("\(model.numberOfPhotos ?? 0)")
-        self.iconImageView.image = model.image
+        titleLabel.text = model.description
+        additionalTextLabel.text = String("\(model.numberOfPhotos ?? 0)")
+        iconImageView.image = model.image
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        iconImageView.image = nil
+    }
 }
 

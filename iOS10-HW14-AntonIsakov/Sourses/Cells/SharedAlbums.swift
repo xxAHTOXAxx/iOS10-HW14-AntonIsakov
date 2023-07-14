@@ -73,14 +73,15 @@ class SharedAlbums: UICollectionViewCell {
     // MARK: - Configuration
     
     func configuration(model: CompositionalItem) {
-        self.featuredTitle.text = model.description
-        self.numberOfPhotos.text = String("\(model.numberOfPhotos ?? 0)")
-        self.image.image = model.image
+        featuredTitle.text = model.description
+        numberOfPhotos.text = String("\(model.numberOfPhotos ?? 0)")
+        image.image = model.image
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.image.image = nil
+        image.image = nil
+        featuredTitle.text = ""
     }
     
 }

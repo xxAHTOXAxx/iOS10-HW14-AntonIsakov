@@ -59,13 +59,11 @@ class MediaTypes: UICollectionViewCell {
         contentView.addSubview(arrowImageView)
         contentView.addSubview(additionalTextLabel)
         contentView.addSubview(divider)
-        
     }
     
     private func setupLayout() {
         
         NSLayoutConstraint.activate([
-            
             iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             iconImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             iconImageView.widthAnchor.constraint(equalToConstant: 24),
@@ -89,9 +87,13 @@ class MediaTypes: UICollectionViewCell {
     }
     
     func configuration(model: CompositionalItem) {
-        self.titleLabel.text = model.description
-        self.additionalTextLabel.text = String("\(model.numberOfPhotos ?? 0)")
-        self.iconImageView.image = model.image
+        titleLabel.text = model.description
+        additionalTextLabel.text = String("\(model.numberOfPhotos ?? 0)")
+        iconImageView.image = model.image
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        iconImageView.image = nil
+    }
 }
