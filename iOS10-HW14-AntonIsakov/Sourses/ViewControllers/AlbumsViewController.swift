@@ -1,16 +1,17 @@
 import UIKit
 
-class CompositionalLayoutViewController: UIViewController {
+class AlbumsViewController: UIViewController {
     
     // MARK: - Outlets
     
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView.register(MyAlbums.self, forCellWithReuseIdentifier: MyAlbums.identifier)
-        collectionView.register(SharedAlbums.self, forCellWithReuseIdentifier: SharedAlbums.identifier)
-        collectionView.register(MediaTypes.self, forCellWithReuseIdentifier: MediaTypes.identifier)
-        collectionView.register(Utilities.self, forCellWithReuseIdentifier: Utilities.identifier)
+        collectionView.register(MyAlbumsCell.self, forCellWithReuseIdentifier: MyAlbumsCell.identifier)
+        collectionView.register(SharedAlbumsCell.self, forCellWithReuseIdentifier: SharedAlbumsCell.identifier)
+        collectionView.register(MediaCell.self, forCellWithReuseIdentifier: MediaCell.identifier)
+        collectionView.register(UtilitiesCell.self, forCellWithReuseIdentifier: UtilitiesCell.identifier)
         collectionView.register(Header.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: Header.identifier)
+        collectionView.register(HeaderWithButtonAll.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderWithButtonAll.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -26,7 +27,6 @@ class CompositionalLayoutViewController: UIViewController {
         setupLayout()
     }
     
-    
     // MARK: - Setup
     
     private func setupView() {
@@ -35,7 +35,8 @@ class CompositionalLayoutViewController: UIViewController {
         let plusButton = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(plusButtonTapped))
         plusButton.setTitleTextAttributes(
             [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 35, weight: .regular)],
-            for: .normal)
+            for: .normal
+        )
         navigationItem.leftBarButtonItem = plusButton
     }
     
@@ -92,7 +93,8 @@ class CompositionalLayoutViewController: UIViewController {
                 let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: layoutSectionHeaderSize,
                     elementKind: UICollectionView.elementKindSectionHeader,
-                    alignment: .top)
+                    alignment: .top
+                )
                 layoutSection.boundarySupplementaryItems = [layoutSectionHeader]
                 layoutSection.interGroupSpacing = 5
                 
@@ -138,7 +140,8 @@ class CompositionalLayoutViewController: UIViewController {
                 let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: layoutSectionHeaderSize,
                     elementKind: UICollectionView.elementKindSectionHeader,
-                    alignment: .top)
+                    alignment: .top
+                )
                 layoutSection.boundarySupplementaryItems = [layoutSectionHeader]
                 
                 return layoutSection
@@ -174,7 +177,8 @@ class CompositionalLayoutViewController: UIViewController {
                 let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: layoutSectionHeaderSize,
                     elementKind: UICollectionView.elementKindSectionHeader,
-                    alignment: .top)
+                    alignment: .top
+                )
                 layoutSection.boundarySupplementaryItems = [layoutSectionHeader]
                 
                 return layoutSection
@@ -185,9 +189,9 @@ class CompositionalLayoutViewController: UIViewController {
 
 // MARK: - Collection Setup
 
-extension CompositionalLayoutViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let currentSection = CompositionalSection.modelSectionArray[section]
+        let currentSection = ModelSection.modelSectionArray[section]
         let itemCount = currentSection.items.count
         return itemCount
     }
@@ -197,29 +201,29 @@ extension CompositionalLayoutViewController: UICollectionViewDataSource, UIColle
         switch indexPath.section {
             
         case 0:
-            let item = collectionView.dequeueReusableCell(withReuseIdentifier: MyAlbums.identifier, for: indexPath) as? MyAlbums
-            let section = CompositionalSection.modelSectionArray[indexPath.section]
+            let item = collectionView.dequeueReusableCell(withReuseIdentifier: MyAlbumsCell.identifier, for: indexPath) as? MyAlbumsCell
+            let section = ModelSection.modelSectionArray[indexPath.section]
             let model = section.items[indexPath.item]
             item?.configuration(model: model)
             
             return item ?? UICollectionViewCell()
         case 1:
-            let item = collectionView.dequeueReusableCell(withReuseIdentifier: SharedAlbums.identifier, for: indexPath) as? SharedAlbums
-            let section = CompositionalSection.modelSectionArray[indexPath.section]
+            let item = collectionView.dequeueReusableCell(withReuseIdentifier: SharedAlbumsCell.identifier, for: indexPath) as? SharedAlbumsCell
+            let section = ModelSection.modelSectionArray[indexPath.section]
             let model = section.items[indexPath.item]
             item?.configuration(model: model)
             
             return item ?? UICollectionViewCell()
         case 2:
-            let item = collectionView.dequeueReusableCell(withReuseIdentifier: MediaTypes.identifier, for: indexPath) as? MediaTypes
-            let section = CompositionalSection.modelSectionArray[indexPath.section]
+            let item = collectionView.dequeueReusableCell(withReuseIdentifier: MediaCell.identifier, for: indexPath) as? MediaCell
+            let section = ModelSection.modelSectionArray[indexPath.section]
             let model = section.items[indexPath.item]
             item?.configuration(model: model)
             
             return item ?? UICollectionViewCell()
         default:
-            let item = collectionView.dequeueReusableCell(withReuseIdentifier: Utilities.identifier, for: indexPath) as? Utilities
-            let section = CompositionalSection.modelSectionArray[indexPath.section]
+            let item = collectionView.dequeueReusableCell(withReuseIdentifier: UtilitiesCell.identifier, for: indexPath) as? UtilitiesCell
+            let section = ModelSection.modelSectionArray[indexPath.section]
             let model = section.items[indexPath.item]
             item?.configuration(model: model)
             
@@ -231,35 +235,35 @@ extension CompositionalLayoutViewController: UICollectionViewDataSource, UIColle
         
         switch indexPath.section {
         case 0:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as! Header
-            let section = CompositionalSection.modelSectionArray[indexPath.section]
-            header.configuration(model: section)
-            header.isAllButtonHidden = false
-            return header
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderWithButtonAll.identifier, for: indexPath) as? HeaderWithButtonAll
+            let section = ModelSection.modelSectionArray[indexPath.section]
+            header?.configuration(model: section)
+            
+            return header ?? UICollectionReusableView()
         case 1:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as! Header
-            let section = CompositionalSection.modelSectionArray[indexPath.section]
-            header.configuration(model: section)
-            header.isAllButtonHidden = true
-            return header
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as? Header
+            let section = ModelSection.modelSectionArray[indexPath.section]
+            header?.configuration(model: section)
+            
+            return header ?? UICollectionReusableView()
         case 2:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as! Header
-            let section = CompositionalSection.modelSectionArray[indexPath.section]
-            header.configuration(model: section)
-            header.isAllButtonHidden = true
-            return header
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as? Header
+            let section = ModelSection.modelSectionArray[indexPath.section]
+            header?.configuration(model: section)
+            
+            return header ?? UICollectionReusableView()
         default:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as! Header
-            let section = CompositionalSection.modelSectionArray[indexPath.section]
-            header.configuration(model: section)
-            header.isAllButtonHidden = true
-            return header
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as? Header
+            let section = ModelSection.modelSectionArray[indexPath.section]
+            header?.configuration(model: section)
+            
+            return header ?? UICollectionReusableView()
             
         }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return CompositionalSection.modelSectionArray.count
+        return ModelSection.modelSectionArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

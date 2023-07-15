@@ -1,16 +1,17 @@
+
 import UIKit
 
-class MyAlbums: UICollectionViewCell {
+class SharedAlbumsCell: UICollectionViewCell {
     
-    static let identifier = "MyAlbums"
+    static let identifier = "SharedAlbums"
     
     // MARK: - Outlets
     
     private lazy var numberOfPhotos: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .systemGray
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -46,7 +47,6 @@ class MyAlbums: UICollectionViewCell {
     // MARK: - Setup
     
     private func setupHierarchy() {
-        
         contentView.addSubview(image)
         contentView.addSubview(numberOfPhotos)
         contentView.addSubview(featuredTitle)
@@ -59,11 +59,11 @@ class MyAlbums: UICollectionViewCell {
             image.trailingAnchor.constraint (equalTo: contentView.trailingAnchor, constant: -2),
             image.heightAnchor.constraint (equalTo: image .widthAnchor) ,
             
-            featuredTitle.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 8),
+            featuredTitle.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 2),
             featuredTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
             featuredTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
             
-            numberOfPhotos.topAnchor.constraint(equalTo: featuredTitle.bottomAnchor, constant: 4),
+            numberOfPhotos.topAnchor.constraint(equalTo: featuredTitle.bottomAnchor, constant: 2), 
             numberOfPhotos.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
             numberOfPhotos.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
             numberOfPhotos.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
@@ -72,14 +72,16 @@ class MyAlbums: UICollectionViewCell {
     
     // MARK: - Configuration
     
-    func configuration(model: CompositionalItem) {
-        self.featuredTitle.text = model.description
-        self.numberOfPhotos.text = String("\(model.numberOfPhotos ?? 0)")
-        self.image.image = model.image
+    func configuration(model: ModelItem) {
+        featuredTitle.text = model.description
+        numberOfPhotos.text = String("\(model.numberOfPhotos ?? 0)")
+        image.image = model.image
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.image.image = nil
+        image.image = nil
+        featuredTitle.text = ""
     }
+    
 }

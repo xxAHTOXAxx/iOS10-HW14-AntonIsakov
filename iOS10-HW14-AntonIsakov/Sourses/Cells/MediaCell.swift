@@ -1,9 +1,8 @@
-
 import UIKit
 
-class Utilities: UICollectionViewCell {
+class MediaCell: UICollectionViewCell {
     
-    static let identifier = "Utilities"
+    static let identifier = "MediaTypes"
     
     private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
@@ -63,8 +62,8 @@ class Utilities: UICollectionViewCell {
     }
     
     private func setupLayout() {
+        
         NSLayoutConstraint.activate([
-            
             iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             iconImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             iconImageView.widthAnchor.constraint(equalToConstant: 24),
@@ -87,11 +86,14 @@ class Utilities: UICollectionViewCell {
         ])
     }
     
-    func configuration(model: CompositionalItem) {
-        self.titleLabel.text = model.description
-        self.additionalTextLabel.text = String("\(model.numberOfPhotos ?? 0)")
-        self.iconImageView.image = model.image
+    func configuration(model: ModelItem) {
+        titleLabel.text = model.description
+        additionalTextLabel.text = String("\(model.numberOfPhotos ?? 0)")
+        iconImageView.image = model.image
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        iconImageView.image = nil
+    }
 }
-

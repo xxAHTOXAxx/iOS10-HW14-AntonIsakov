@@ -5,14 +5,27 @@ final class MainTabBarController: UITabBarController {
         let tabBarController = UITabBarController ()
         tabBarController.setViewControllers(
             [
-                createChildViewController(controller: FirstTabBarViewController(), title: "Медиатека", image:
-                                            UIImage(systemName: "photo.fill.on.rectangle.fill"), tag: 0),
-                createChildViewController(controller: SecondTabBarViewController(), title: "Для Bac", image:
-                                            UIImage (systemName: "heart.text.square.fill"), tag: 1),
-                createChildViewController(controller: CompositionalLayoutViewController(), title: "Альбомы",
-                                          image: UIImage(systemName: "rectangle.stack.fill"), tag: 2),
-                createChildViewController(controller: FourthTabBarViewController(), title: "Поиск",
-                                          image: UIImage (systemName: "magnifyingglass"), tag: 3) ],
+                createChildViewController(
+                    controller: MediaViewController(),
+                    title: "Медиатека",
+                    image: UIImage(systemName: "photo.fill.on.rectangle.fill"),
+                    tag: 0),
+                createChildViewController(
+                    controller: AboutYourselfViewController(),
+                    title: "Для Bac",
+                    image: UIImage (systemName: "heart.text.square.fill"),
+                    tag: 1),
+                createChildViewController(
+                    controller: AlbumsViewController(),
+                    title: "Альбомы",
+                    image: UIImage(systemName: "rectangle.stack.fill"),
+                    tag: 2),
+                createChildViewController(
+                    controller: SearchViewController(),
+                    title: "Поиск",
+                    image: UIImage (systemName: "magnifyingglass"),
+                    tag: 3)
+            ],
             animated: true
         )
         tabBarController.selectedIndex = 2

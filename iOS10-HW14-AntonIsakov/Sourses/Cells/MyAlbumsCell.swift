@@ -1,17 +1,16 @@
-
 import UIKit
 
-class SharedAlbums: UICollectionViewCell {
+class MyAlbumsCell: UICollectionViewCell {
     
-    static let identifier = "SharedAlbums"
+    static let identifier = "MyAlbums"
     
     // MARK: - Outlets
     
     private lazy var numberOfPhotos: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = .systemGray
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .systemGray
         return label
     }()
     
@@ -59,11 +58,11 @@ class SharedAlbums: UICollectionViewCell {
             image.trailingAnchor.constraint (equalTo: contentView.trailingAnchor, constant: -2),
             image.heightAnchor.constraint (equalTo: image .widthAnchor) ,
             
-            featuredTitle.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 2),
+            featuredTitle.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 8),
             featuredTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
             featuredTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
             
-            numberOfPhotos.topAnchor.constraint(equalTo: featuredTitle.bottomAnchor, constant: 2), 
+            numberOfPhotos.topAnchor.constraint(equalTo: featuredTitle.bottomAnchor, constant: 4),
             numberOfPhotos.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
             numberOfPhotos.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
             numberOfPhotos.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
@@ -72,15 +71,15 @@ class SharedAlbums: UICollectionViewCell {
     
     // MARK: - Configuration
     
-    func configuration(model: CompositionalItem) {
-        self.featuredTitle.text = model.description
-        self.numberOfPhotos.text = String("\(model.numberOfPhotos ?? 0)")
-        self.image.image = model.image
-    }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        self.image.image = nil
+    func configuration(model: ModelItem) {
+        featuredTitle.text = model.description
+        numberOfPhotos.text = String("\(model.numberOfPhotos ?? 0)")
+        image.image = model.image
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        image.image = nil
+        featuredTitle.text = ""
+    }
 }
