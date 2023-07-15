@@ -1,7 +1,7 @@
 
 import UIKit
 
-class SharedAlbums: UICollectionViewCell {
+class SharedAlbumsCell: UICollectionViewCell {
     
     static let identifier = "SharedAlbums"
     
@@ -72,7 +72,7 @@ class SharedAlbums: UICollectionViewCell {
     
     // MARK: - Configuration
     
-    func configuration(model: CompositionalItem) {
+    func configuration(model: ModelItem) {
         featuredTitle.text = model.description
         numberOfPhotos.text = String("\(model.numberOfPhotos ?? 0)")
         image.image = model.image

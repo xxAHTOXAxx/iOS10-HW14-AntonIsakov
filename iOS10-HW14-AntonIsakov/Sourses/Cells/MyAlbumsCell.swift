@@ -1,6 +1,6 @@
 import UIKit
 
-class MyAlbums: UICollectionViewCell {
+class MyAlbumsCell: UICollectionViewCell {
     
     static let identifier = "MyAlbums"
     
@@ -71,7 +71,7 @@ class MyAlbums: UICollectionViewCell {
     
     // MARK: - Configuration
     
-    func configuration(model: CompositionalItem) {
+    func configuration(model: ModelItem) {
         featuredTitle.text = model.description
         numberOfPhotos.text = String("\(model.numberOfPhotos ?? 0)")
         image.image = model.image

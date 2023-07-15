@@ -1,6 +1,6 @@
 import UIKit
 
-class MediaTypes: UICollectionViewCell {
+class MediaCell: UICollectionViewCell {
     
     static let identifier = "MediaTypes"
     
@@ -86,7 +86,7 @@ class MediaTypes: UICollectionViewCell {
         ])
     }
     
-    func configuration(model: CompositionalItem) {
+    func configuration(model: ModelItem) {
         titleLabel.text = model.description
         additionalTextLabel.text = String("\(model.numberOfPhotos ?? 0)")
         iconImageView.image = model.image

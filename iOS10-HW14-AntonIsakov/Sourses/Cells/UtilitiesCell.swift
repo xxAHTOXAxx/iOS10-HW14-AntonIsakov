@@ -1,7 +1,7 @@
 
 import UIKit
 
-class Utilities: UICollectionViewCell {
+class UtilitiesCell: UICollectionViewCell {
     
     static let identifier = "Utilities"
     
@@ -87,7 +87,7 @@ class Utilities: UICollectionViewCell {
         ])
     }
     
-    func configuration(model: CompositionalItem) {
+    func configuration(model: ModelItem) {
         titleLabel.text = model.description
         additionalTextLabel.text = String("\(model.numberOfPhotos ?? 0)")
         iconImageView.image = model.image

@@ -1,8 +1,8 @@
 import UIKit
 
-class Header: UICollectionReusableView {
+class HeaderWithButtonAll: UICollectionReusableView {
     
-    static let identifier = "Header"
+    static let identifier = "HeaderWithButtonAll"
     
     // MARK: - Outlets
     
@@ -22,11 +22,12 @@ class Header: UICollectionReusableView {
         return button
     }()
     
-    var isAllButtonHidden: Bool = false {
-        didSet {
-            allButton.isHidden = isAllButtonHidden
-        }
-    }
+    private lazy var divider: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.systemGray2.withAlphaComponent(0.5)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     // MARK: - Initializers
     
@@ -46,6 +47,7 @@ class Header: UICollectionReusableView {
     private func setupHierarchy() {
         addSubview(title)
         addSubview(allButton)
+        addSubview(divider)
     }
     
     private func setupLayout() {
@@ -55,10 +57,15 @@ class Header: UICollectionReusableView {
             
             allButton.centerYAnchor.constraint(equalTo: title.centerYAnchor),
             allButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -1),
+            
+            divider.bottomAnchor.constraint(equalTo: title.topAnchor, constant: -8),
+            divider.leadingAnchor.constraint(equalTo: leadingAnchor),
+            divider.trailingAnchor.constraint(equalTo: trailingAnchor),
+            divider.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
     
-    func configuration(model: CompositionalSection) {
+    func configuration(model: ModelSection) {
         self.title.text = model.name
     }
     
@@ -69,4 +76,3 @@ class Header: UICollectionReusableView {
     
     @objc private func allButtonTapped() {}
 }
-
