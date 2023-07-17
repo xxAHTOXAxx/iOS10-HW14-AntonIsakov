@@ -72,7 +72,7 @@ class SharedAlbumsCell: UICollectionViewCell {
     
     // MARK: - Configuration
     
-    func configuration(model: ModelItem) {
+    func configuration(model: EntitylItem) {
         featuredTitle.text = model.description
         numberOfPhotos.text = String("\(model.numberOfPhotos ?? 0)")
         image.image = model.image

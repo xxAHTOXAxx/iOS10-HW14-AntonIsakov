@@ -1,6 +1,8 @@
 import UIKit
 
-class AlbumsViewController: UIViewController {
+class AlbumsViewController: UIViewController, ViewInputProtocol {
+    
+    var output: ViewOutputProtocol?
     
     // MARK: - Outlets
     

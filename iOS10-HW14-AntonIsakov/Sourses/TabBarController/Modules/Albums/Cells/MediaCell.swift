@@ -86,7 +86,7 @@ class MediaCell: UICollectionViewCell {
         ])
     }
     
-    func configuration(model: ModelItem) {
+    func configuration(model: EntitylItem) {
         titleLabel.text = model.description
         additionalTextLabel.text = String("\(model.numberOfPhotos ?? 0)")
         iconImageView.image = model.image
