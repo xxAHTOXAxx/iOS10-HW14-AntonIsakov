@@ -6,12 +6,9 @@ class AlbumsViewController: UIViewController {
     
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView.register(MyAlbumsCell.self, forCellWithReuseIdentifier: MyAlbumsCell.identifier)
-        collectionView.register(SharedAlbumsCell.self, forCellWithReuseIdentifier: SharedAlbumsCell.identifier)
-        collectionView.register(MediaCell.self, forCellWithReuseIdentifier: MediaCell.identifier)
-        collectionView.register(UtilitiesCell.self, forCellWithReuseIdentifier: UtilitiesCell.identifier)
+        collectionView.register(CellsWithPhoto.self, forCellWithReuseIdentifier: CellsWithPhoto.identifier)
+        collectionView.register(CellsNonePhoto.self, forCellWithReuseIdentifier: CellsNonePhoto.identifier)
         collectionView.register(Header.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: Header.identifier)
-        collectionView.register(HeaderWithButtonAll.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderWithButtonAll.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -52,6 +49,8 @@ class AlbumsViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
+    @objc private func plusButtonTapped() {}
     
     // MARK: - CollectionViewLayout
     
@@ -201,31 +200,36 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
         switch indexPath.section {
             
         case 0:
-            let item = collectionView.dequeueReusableCell(withReuseIdentifier: MyAlbumsCell.identifier, for: indexPath) as? MyAlbumsCell
+            let item = collectionView.dequeueReusableCell(withReuseIdentifier: CellsWithPhoto.identifier, for: indexPath) as? CellsWithPhoto
             let section = ModelSection.modelSectionArray[indexPath.section]
             let model = section.items[indexPath.item]
             item?.configuration(model: model)
             
             return item ?? UICollectionViewCell()
         case 1:
-            let item = collectionView.dequeueReusableCell(withReuseIdentifier: SharedAlbumsCell.identifier, for: indexPath) as? SharedAlbumsCell
+            let item = collectionView.dequeueReusableCell(withReuseIdentifier: CellsWithPhoto.identifier, for: indexPath) as? CellsWithPhoto
             let section = ModelSection.modelSectionArray[indexPath.section]
             let model = section.items[indexPath.item]
             item?.configuration(model: model)
             
             return item ?? UICollectionViewCell()
         case 2:
-            let item = collectionView.dequeueReusableCell(withReuseIdentifier: MediaCell.identifier, for: indexPath) as? MediaCell
+            let item = collectionView.dequeueReusableCell(withReuseIdentifier: CellsNonePhoto.identifier, for: indexPath) as? CellsNonePhoto
             let section = ModelSection.modelSectionArray[indexPath.section]
             let model = section.items[indexPath.item]
             item?.configuration(model: model)
+            let isLastCell = indexPath.item == section.items.count - 1
+            item?.takeAwayLastDivider(isLastCell: isLastCell)
+                
             
             return item ?? UICollectionViewCell()
         default:
-            let item = collectionView.dequeueReusableCell(withReuseIdentifier: UtilitiesCell.identifier, for: indexPath) as? UtilitiesCell
+            let item = collectionView.dequeueReusableCell(withReuseIdentifier: CellsNonePhoto.identifier, for: indexPath) as? CellsNonePhoto
             let section = ModelSection.modelSectionArray[indexPath.section]
             let model = section.items[indexPath.item]
             item?.configuration(model: model)
+            let isLastCell = indexPath.item == section.items.count - 1
+            item?.takeAwayLastDivider(isLastCell: isLastCell)
             
             return item ?? UICollectionViewCell()
         }
@@ -235,7 +239,7 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
         
         switch indexPath.section {
         case 0:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderWithButtonAll.identifier, for: indexPath) as? HeaderWithButtonAll
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as? Header
             let section = ModelSection.modelSectionArray[indexPath.section]
             header?.configuration(model: section)
             
@@ -244,6 +248,7 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as? Header
             let section = ModelSection.modelSectionArray[indexPath.section]
             header?.configuration(model: section)
+            header?.takeAwayAllButton()
             
             return header ?? UICollectionReusableView()
         case 2:
@@ -251,14 +256,16 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
             let section = ModelSection.modelSectionArray[indexPath.section]
             header?.configuration(model: section)
             
+            header?.takeAwayAllButton()
+            
             return header ?? UICollectionReusableView()
         default:
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as? Header
             let section = ModelSection.modelSectionArray[indexPath.section]
             header?.configuration(model: section)
+            header?.takeAwayAllButton()
             
             return header ?? UICollectionReusableView()
-            
         }
     }
     
@@ -270,7 +277,7 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
         collectionView.deselectItem(at: indexPath, animated: true)
     }
     
-    @objc private func plusButtonTapped() {}
+    
 }
 
 
