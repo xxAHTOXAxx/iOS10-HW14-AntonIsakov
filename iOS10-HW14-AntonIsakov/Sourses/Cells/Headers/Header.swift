@@ -2,7 +2,7 @@ import UIKit
 
 class Header: UICollectionReusableView {
     
-    static let identifier = "Header"
+    static let identifier = "HeaderWithButtonAll"
     
     // MARK: - Outlets
     
@@ -11,6 +11,15 @@ class Header: UICollectionReusableView {
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    private lazy var allButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Все", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(allButtonTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     private lazy var divider: UIView = {
@@ -37,6 +46,7 @@ class Header: UICollectionReusableView {
     
     private func setupHierarchy() {
         addSubview(title)
+        addSubview(allButton)
         addSubview(divider)
     }
     
@@ -44,6 +54,9 @@ class Header: UICollectionReusableView {
         NSLayoutConstraint.activate([
             title.bottomAnchor.constraint(equalTo: bottomAnchor),
             title.leftAnchor.constraint(equalTo: leftAnchor),
+            
+            allButton.centerYAnchor.constraint(equalTo: title.centerYAnchor),
+            allButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -1),
             
             divider.bottomAnchor.constraint(equalTo: title.topAnchor, constant: -8),
             divider.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -56,6 +69,10 @@ class Header: UICollectionReusableView {
         self.title.text = model.name
     }
     
+    func takeAwayAllButton() {
+        allButton.isHidden = true
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         title.text = nil
@@ -63,4 +80,3 @@ class Header: UICollectionReusableView {
     
     @objc private func allButtonTapped() {}
 }
-

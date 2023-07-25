@@ -1,9 +1,8 @@
-
 import UIKit
 
-class UtilitiesCell: UICollectionViewCell {
+class CellsNonePhoto: UICollectionViewCell {
     
-    static let identifier = "Utilities"
+    static let identifier = "MediaTypes"
     
     private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
@@ -63,8 +62,8 @@ class UtilitiesCell: UICollectionViewCell {
     }
     
     private func setupLayout() {
+        
         NSLayoutConstraint.activate([
-            
             iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             iconImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             iconImageView.widthAnchor.constraint(equalToConstant: 24),
@@ -87,6 +86,10 @@ class UtilitiesCell: UICollectionViewCell {
         ])
     }
     
+    func takeAwayLastDivider(isLastCell: Bool) {
+        divider.isHidden = isLastCell
+    }
+    
     func configuration(model: ModelItem) {
         titleLabel.text = model.description
         additionalTextLabel.text = String("\(model.numberOfPhotos ?? 0)")
@@ -97,5 +100,26 @@ class UtilitiesCell: UICollectionViewCell {
         super.prepareForReuse()
         iconImageView.image = nil
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        UIView.animate(withDuration: 0.15) {
+            self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+            print("Была нажата ячейка \(ModelItem.description)")
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        UIView.animate(withDuration: 0.15) {
+            self.transform = CGAffineTransform.identity
+        }
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        UIView.animate(withDuration: 0.15) {
+            self.transform = CGAffineTransform.identity
+        }
+    }
 }
-
