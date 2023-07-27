@@ -255,7 +255,6 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as? Header
             let section = ModelSection.modelSectionArray[indexPath.section]
             header?.configuration(model: section)
-            
             header?.takeAwayAllButton()
             
             return header ?? UICollectionReusableView()
@@ -276,8 +275,6 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
     }
-    
-    
 }
 
 

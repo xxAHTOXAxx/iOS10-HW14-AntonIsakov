@@ -105,21 +105,21 @@ class CellsNonePhoto: UICollectionViewCell {
         super.touchesBegan(touches, with: event)
         UIView.animate(withDuration: 0.15) {
             self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-            print("Была нажата ячейка \(ModelItem.description)")
+            print("Ячейка была нажата")
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        UIView.animate(withDuration: 0.15) {
-            self.transform = CGAffineTransform.identity
+            super.touchesEnded(touches, with: event)
+            UIView.animate(withDuration: 0.15) {
+                self.transform = CGAffineTransform.identity
+            }
         }
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesCancelled(touches, with: event)
-        UIView.animate(withDuration: 0.15) {
-            self.transform = CGAffineTransform.identity
+
+        override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+            super.touchesCancelled(touches, with: event)
+            UIView.animate(withDuration: 0.15) {
+                self.transform = CGAffineTransform.identity
+            }
         }
-    }
 }
