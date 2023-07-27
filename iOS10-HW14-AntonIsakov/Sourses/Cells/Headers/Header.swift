@@ -67,15 +67,15 @@ class Header: UICollectionReusableView {
     
     func configuration(model: ModelSection) {
         self.title.text = model.name
-    }
-    
-    func takeAwayAllButton() {
-        allButton.isHidden = true
+        allButton.setTitle(model.headerButtonName, for: .normal)
+        allButton.isHidden = model.headerButtonName == nil
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         title.text = nil
+        allButton.setTitle("", for: .normal)
+        allButton.isHidden = true
     }
     
     @objc private func allButtonTapped() {}

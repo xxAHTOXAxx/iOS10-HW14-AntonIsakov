@@ -35,8 +35,12 @@ final class MainTabBarController: UITabBarController {
         tabBarController.selectedIndex = 2
         return tabBarController
     }
-    private static func createChildViewController (controller: UIViewController, title: String,
-                                                   image: UIImage?, tag: Int) -> UIViewController {
+    private static func createChildViewController (controller:
+                                                   UIViewController,
+                                                   title: String,
+                                                   image: UIImage?,
+                                                   tag: Int) ->
+    UIViewController {
         let viewController = controller
         let navigationController = UINavigationController (rootViewController: viewController)
         viewController.tabBarItem = UITabBarItem(title: title, image: image, tag: tag)
