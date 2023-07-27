@@ -8,6 +8,7 @@ struct ModelItem: Hashable {
 
 struct ModelSection: Hashable {
     var name: String
+    var headerButtonName: String?
     var items: [ModelItem]
 }
 
@@ -16,6 +17,7 @@ extension ModelSection {
     static var modelSectionArray = [
         ModelSection(
             name: "Мои альбомы",
+            headerButtonName: "Все",
             items: [
                 ModelItem(description: "Недавние", image: UIImage(named: "BMW") ?? UIImage() , numberOfPhotos: 6),
                 ModelItem(description: "Избранное", image: UIImage(named: "tiger") ?? UIImage(), numberOfPhotos: 226),

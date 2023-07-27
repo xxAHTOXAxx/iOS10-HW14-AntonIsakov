@@ -2,7 +2,7 @@ import UIKit
 
 class AlbumsViewController: UIViewController {
     
-    // MARK: - Outlets
+    private let model = ModelSection.modelSectionArray
     
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
@@ -190,83 +190,42 @@ class AlbumsViewController: UIViewController {
 
 extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let currentSection = ModelSection.modelSectionArray[section]
-        let itemCount = currentSection.items.count
-        return itemCount
+        model[section].items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         switch indexPath.section {
             
-        case 0:
-            let item = collectionView.dequeueReusableCell(withReuseIdentifier: CellsWithPhoto.identifier, for: indexPath) as? CellsWithPhoto
-            let section = ModelSection.modelSectionArray[indexPath.section]
-            let model = section.items[indexPath.item]
-            item?.configuration(model: model)
+        case 0, 1:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsWithPhoto.identifier, for: indexPath) as? CellsWithPhoto else {
+                return UICollectionViewCell() }
             
-            return item ?? UICollectionViewCell()
-        case 1:
-            let item = collectionView.dequeueReusableCell(withReuseIdentifier: CellsWithPhoto.identifier, for: indexPath) as? CellsWithPhoto
-            let section = ModelSection.modelSectionArray[indexPath.section]
-            let model = section.items[indexPath.item]
-            item?.configuration(model: model)
+            let model = model[indexPath.section].items[indexPath.item]
+            cell.configuration(model: model)
             
-            return item ?? UICollectionViewCell()
-        case 2:
-            let item = collectionView.dequeueReusableCell(withReuseIdentifier: CellsNonePhoto.identifier, for: indexPath) as? CellsNonePhoto
-            let section = ModelSection.modelSectionArray[indexPath.section]
-            let model = section.items[indexPath.item]
-            item?.configuration(model: model)
-            let isLastCell = indexPath.item == section.items.count - 1
-            item?.takeAwayLastDivider(isLastCell: isLastCell)
-                
-            
-            return item ?? UICollectionViewCell()
+            return cell
         default:
-            let item = collectionView.dequeueReusableCell(withReuseIdentifier: CellsNonePhoto.identifier, for: indexPath) as? CellsNonePhoto
-            let section = ModelSection.modelSectionArray[indexPath.section]
-            let model = section.items[indexPath.item]
-            item?.configuration(model: model)
-            let isLastCell = indexPath.item == section.items.count - 1
-            item?.takeAwayLastDivider(isLastCell: isLastCell)
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsNonePhoto.identifier, for: indexPath) as? CellsNonePhoto else { return UICollectionViewCell() }
             
-            return item ?? UICollectionViewCell()
+            let model = model[indexPath.section].items[indexPath.item]
+            cell.configuration(model: model)
+            let isLastCell = indexPath.item == self.model[indexPath.section].items.count - 1
+            cell.takeAwayLastDivider(isLastCell: isLastCell)
+            
+            return cell
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        switch indexPath.section {
-        case 0:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as? Header
-            let section = ModelSection.modelSectionArray[indexPath.section]
-            header?.configuration(model: section)
             
-            return header ?? UICollectionReusableView()
-        case 1:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as? Header
-            let section = ModelSection.modelSectionArray[indexPath.section]
-            header?.configuration(model: section)
-            header?.takeAwayAllButton()
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as? Header else { return UICollectionReusableView() }
             
-            return header ?? UICollectionReusableView()
-        case 2:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as? Header
-            let section = ModelSection.modelSectionArray[indexPath.section]
-            header?.configuration(model: section)
-            header?.takeAwayAllButton()
+            let section = model[indexPath.section]
+            header.configuration(model: section)
             
-            return header ?? UICollectionReusableView()
-        default:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header.identifier, for: indexPath) as? Header
-            let section = ModelSection.modelSectionArray[indexPath.section]
-            header?.configuration(model: section)
-            header?.takeAwayAllButton()
-            
-            return header ?? UICollectionReusableView()
+            return header
         }
-    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return ModelSection.modelSectionArray.count
